@@ -1,0 +1,69 @@
+<% if @current_user %>
+
+	<section class="Collage effect-parent">
+		
+		
+	<section>
+
+
+	<script>
+		$(function(){
+
+			var response = $.ajax({
+			     type: 'GET',
+			     success: function() {
+
+			     	var photoJsonArr = response.responseJSON;
+			     	// console.log(photoJsonArr[0].photo_url);
+
+					var totalHTML = '';
+					for (var i = 0; i <= photoJsonArr.length - 1; i++) {
+						var insertHTML = '<div class="Image_Wrapper">' + 
+											'<div class="heart-overlay fadeOut"></div>' +
+											    '<a><img src=' + photoJsonArr[i].photo_url +
+											    ' class="instaImage"></a></div>'; 
+						totalHTML += insertHTML;
+					};
+					
+					console.log(totalHTML);
+					$('.Collage').html(totalHTML);
+
+					collage();
+	            	$('.Collage').collageCaption();
+
+	            	// Here we apply the actual CollagePlus plugin
+				    function collage() {
+				        $('.Collage').removeWhitespace().collagePlus({
+				            'targetHeight': 400,
+				            'effect': 'effect-2',
+				            'direction': 'vertical'
+				        });
+				    };
+
+				    // For browser resizing
+				    var resizeTimer = null;
+				    $(window).bind('resize', function() {
+				        // hide all the images until we resize them
+				        $('.Collage .Image_Wrapper').css("opacity", 0);
+				        // set a timer to re-apply the plugin
+				        if (resizeTimer) clearTimeout(resizeTimer);
+				        resizeTimer = setTimeout(collage, 200);
+				    });
+
+
+			     },
+			     error: function(){ console.log('FAILURE!!!') },
+			     url: '/photos/photo_finder',
+			     cache:false
+			});
+
+			
+
+		});
+
+
+
+	</script>
+<% else %>
+    <% redirect_to searchy_path %>
+<% end %>

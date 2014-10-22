@@ -1,0 +1,37 @@
+<div class="search-overlay fadeOut">
+        <div class="search-wrapper">
+            <!-- Simple form with one text field automatically focused -->
+	
+			 <form action="/searches" method="get">
+			 	<input type="text" name="search_term" autofocus="true">
+			  	<input type="submit">	
+			 </form>
+
+        </div>
+    </div>
+
+    <section class="Collage effect-parent">
+		
+		<!-- Mavis code for instagram pictures -->
+      <%#= @tag_name %>
+      <%#= @media_count %>
+      <%# @media_item.each do |m| %>
+      <!-- <img src=" <%#= m.images.thumbnail.url %> "> -->
+      <%# end %>
+
+      <% @media_item.each do |m| %>
+
+		<%#= m.to_json  %>
+		<div class="Image_Wrapper" data-caption='#hashtag<%#= m.caption.text -%>'>
+			<div class="heart-overlay fadeOut"></div>
+			<a>
+            <img src=<%= m.images.standard_resolution.url %> class="instaImage">
+            </a>
+		</div>
+
+      <% end %>
+
+    </section>
+
+
+		

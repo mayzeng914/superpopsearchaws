@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SuperPopSearch</title>
+  <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header class="header">
+		<div class="img-wrapper">
+		    <a href="../searches">
+		    	<%= image_tag("superpop.svg", class: "superpop-logo") %>
+		    </a>
+		</div>
+		<% if @current_user %>
+			<a href="/sessions/destroy" class="log">Log Out</a>
+			<div data-id=<%= @current_user.id %> class="profile-data">
+			<p><%= @current_user.full_name %></p>
+			<a href="/photos/photo_wall"><img src='<%= @current_user.prof_pic %>' alt="Profile Picture"></a>
+
+		</div>
+		<% else %>
+			<a href="../oauth/connect" class="log">Log in</a>
+		<% end %>
+		
+		
+		
+		
+    </header>
+  
+<%= yield %>
+
+</body>
+</html>
